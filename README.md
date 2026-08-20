@@ -53,11 +53,20 @@ How do I install this plugin?
 This plugin can be installed by following the official 
 <a href="http://docs.moodle.org/en/Installing_plugins" target="_blank">Moodle documentation</a>. 
 
+The plugin folder must be named `ws_enrolcohort` and placed inside the `local` directory of your Moodle code base:
+
+* Moodle 4.5 and 5.0: `local/ws_enrolcohort`
+* Moodle 5.1 and later: `public/local/ws_enrolcohort` (Moodle code now lives inside the `public` directory)
 
 What version of Moodle can I install this on?
 ---------------------------------------------
 
-This plugin has only been developed and tested for Moodle 3.3.
+Version v4.0.0 of this plugin supports Moodle 4.5 LTS up to Moodle 5.2:
+
+* Moodle 4.5 LTS requires PHP 8.1 or later
+* Moodle 5.2 requires PHP 8.3 or later
+
+Older Moodle versions (< 4.5) are no longer supported; use the v3.3.x releases of this plugin for those.
 
 How do I use this plugin?
 -------------------------
