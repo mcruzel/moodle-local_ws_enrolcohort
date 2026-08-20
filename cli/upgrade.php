@@ -33,7 +33,6 @@ global $CFG;
 
 // Other things to require.
 require_once("{$CFG->libdir}/clilib.php");
-require_once("{$CFG->libdir}/cronlib.php");
 require_once("{$CFG->libdir}/upgradelib.php");
 
 // Get the locallib if we have one.
@@ -99,12 +98,12 @@ Run script with default parameters  - \$sudo -u www-data /usr/bin/php upgrade.ph
 
 // Set debugging.
 if (!$options['no-debugging']) {
-    @error_reporting(E_ALL | E_STRICT);
+    error_reporting(E_ALL);
     @ini_set('display_errors', '1');
 }
 
 // Start output log.
-$trace = new \text_progress_trace();
+$trace = new \core\output\progress_trace\text_progress_trace();
 $trace->output(get_string('pluginname', 'local_ws_enrolcohort').' - This is a CLI script that will update webservice things.');
 
 // Say some stuff like debugging is whatever.
@@ -117,7 +116,7 @@ if (!$options['no-debugging']) {
 // Set verbosity and output stuff.
 if ($options['no-verbose']) {
     $trace->output("Verbose output has been disabled.\n");
-    $trace = new \null_progress_trace();
+    $trace = new \core\output\progress_trace\null_progress_trace();
 } else {
     $trace->output("Verbose output is enabled.\n");
 }
@@ -129,7 +128,6 @@ $starttime = microtime();
 
 $trace->output('Updating the webservices without doing the moodle updateyness.');
 external_update_descriptions('local_ws_enrolcohort');
-$pluginman = \core_plugin_manager::instance();
 upgrade_noncore(true);
 $trace->output('The webservice functions stuff should be updated.'.PHP_EOL);
 

@@ -28,6 +28,14 @@ namespace local_ws_enrolcohort;
 // No direct access.
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Helper class with shortcuts to this plugins language strings and settings.
+ *
+ * @package     local_ws_enrolcohort
+ * @author      Donald Barrett <donald.barrett@learningworks.co.nz>
+ * @copyright   2018 onwards, LearningWorks ltd
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class tools {
     /**
      * The plugins component name.
@@ -35,29 +43,15 @@ class tools {
     const COMPONENT_NAME = 'local_ws_enrolcohort';
 
     /**
-     * @param string $identifier
-     * @param null $a
-     * @return string
+     * Gets a language string of this plugin.
+     *
+     * @param string $identifier The language string identifier.
+     * @param mixed $a Optional placeholder value/s for the language string.
+     * @return string The language string.
      * @throws \coding_exception
-     * @throws \dml_exception
      */
     public static function get_string($identifier = '', $a = null) {
-        // Get the string manager so we can do things.
-        $stringman = get_string_manager();
-
-        // Reset caches for our lang strings if it doesn't exist or forced plugin settings to reset lang string caches is set.
-        // Add to moodle config.php - $CFG->forced_plugin_settings = ['local_ws_enrolcohort' => ['resetlangstringcaches' => true]];.
-        if (!$stringman->string_exists($identifier, self::COMPONENT_NAME) || self::get_config('resetlangstringcaches')) {
-            $stringman->reset_caches();
-        }
-
-        if (is_null($a)) {
-            // No placeholder.
-            return get_string($identifier, self::COMPONENT_NAME);
-        } else {
-            // Yes placeholder.
-            return get_string($identifier, self::COMPONENT_NAME, $a);
-        }
+        return get_string($identifier, self::COMPONENT_NAME, $a);
     }
 
     /**
